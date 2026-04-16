@@ -1,0 +1,3 @@
+46.225.178.13.nip.io {
+    reverse_proxy georcp-app:5000
+}

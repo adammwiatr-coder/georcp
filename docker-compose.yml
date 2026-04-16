@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  georcp-app:
+    build: .
+    container_name: rcp_kontener
+    volumes:
+      - ./data:/app/data
+    environment:
+      - TZ=Europe/Warsaw
+    restart: always
+
+  caddy:
+    image: caddy:alpine
+    container_name: caddy_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+    restart: always
+    depends_on:
+      - georcp-app
+
+volumes:
+  caddy_data:
+
